@@ -1,0 +1,114 @@
+::ng-deep * {
+    box-sizing: border-box;
+} 
+::ng-deep #slider-home {
+    max-height: 500px;
+}
+::ng-deep #slider-home .carousel-indicators .active {
+    background-color: #fff;
+}
+::ng-deep #slider-home .carousel-indicators li {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 1px solid #fff;
+    margin-right: 12px;
+    margin-left: 12px;
+    background-color: transparent;
+    position: relative;
+    -webkit-box-flex: 0;
+    flex: 0 1 auto;
+    text-indent: -999px;
+    max-width: 1000px;
+} 
+::ng-deep #slider-home .carousel-indicators {
+    left: 47px;
+    right: initial;
+    margin-left: initial;
+    position: absolute;
+    bottom: -5px;
+    z-index: 2;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding-left: 0;
+    margin-right: 15%;
+    list-style: none;
+    max-width: 1000px;
+}
+::ng-deep .carousel-item.active {
+    display: block;
+}
+::ng-deep .carousel-inner {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    margin-top: 3em;
+}
+::ng-deep .img-responsive {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+@media only screen and (max-width: 767px) {
+    ::ng-deep #slider-home .carousel-indicators li {
+        width: 10px;
+        height: 10px;
+        margin-left: 5px;
+        margin-right: 5px;
+        bottom: -5px;
+    }
+    ::ng-deep #slider-home .carousel-indicators {
+        left: 20px;
+        bottom: -12px;
+        z-index: 2;
+    }
+    ::ng-deep .banner-home {
+        bottom: -3px;
+        margin-left: 0 !important;
+        width: 100% !important;
+        height: 44px;
+        background: #e11f26;
+        -webkit-transform: perspective(300px) rotateX(0deg); 
+    }
+    ::ng-deep .banner .banner-home {
+        display: none !important;
+    }
+}
+::ng-deep .banner-home {    
+    width:850px;
+    height:63px;   
+    background-color: rgb(188, 0, 45);
+    border-bottom-width:1px;
+    -webkit-transform: perspective(200px) rotateX(-25deg);
+    transform-origin: top left; 
+    margin-top: -45px;
+    margin-left: -25px;
+    /*opacity: 0.9;*/
+} 
+::ng-deep .carousel-control-prev-icon { 
+    display: none; 
+}
+::ng-deep .carousel-control-next-icon { 
+    display: none;
+}
+::ng-deep #slider-home .carousel-item {
+    transition: opacity 0.7s ease!important;
+    position: absolute!important;
+    display: block!important;
+    opacity: 0.7;
+ }
+
+::ng-deep #slider-home .carousel-item.active {
+    position: relative!important;
+    opacity: 1;
+  }
+  @media only screen and (max-width: 767px){
+    .banner{
+        height: 30px;
+        background: rgb(188, 0, 45);
+        position: relative!important;
+        top: -20px;
+    }
+  }

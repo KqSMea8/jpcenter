@@ -1,0 +1,111 @@
+<!-- create slide -->
+<div class="banner">
+        <img class="img-responsive" src="/assets/images/news-and-events.png" alt="Course banner">
+        <div>
+            <div class="banner-bottom"></div>
+            <h1>
+                <b class="career">Tin tức và sự kiện</b>
+            </h1>
+        </div>
+    </div>
+<!-- creat breadscrumb -->
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a routerLink = "/trang-chu">Trang chủ</a>
+    </li>
+    <li class="breadcrumb-item ">
+      <a routerLink = "/tin-tuc-su-kien">Tin tức & sự kiện</a>
+    </li>
+    <li class="breadcrumb-item active">
+      Định hướng nghề nghiệp và cơ hội việc làm với TMA Solutions
+      </li>
+  </ol>
+</nav>
+<h4 class="section-title">Định hướng nghề nghiệp và cơ hội việc làm với TMA Solutions</h4>
+<div class="course-content pt-4 mb-0">
+    <div class="title-content d-flex align-items-center">
+        <img src="./assets/images/icon-clock.png" class="m-0 mr-3" alt="icon">
+        <p>Thời gian</p>
+    </div>
+    <p class="mb-4">
+        05/05/2018 (08:00 - 17:30)
+    </p>
+    <div class="title-content d-flex align-items-center">
+        <img src="./assets/images/icon-map.png" class="m-0 mr-3" alt="icon">
+        <p>Địa điểm</p>
+    </div>
+    <p class="mb-4">
+        Hội trường B, Phòng kỹ năng (nhà 4 tầng), trường ĐH Quy Nhơn, 170 An Dương Vương, TP. Quy Nhơn
+    </p>
+    <div class="title-content d-flex align-items-center">
+        <img src="./assets/images/icon-user.png" class="m-0 mr-3" alt="icon">
+        <p>Đối tượng</p>
+    </div>
+    <p class="mb-4">
+        Sinh viên ngành Công nghệ thông tin, Kỹ thuật điện - Điện tử, Kỹ thuật Điện tử, truyền thông, Toán và các ngành có liên quan;
+        các đối tượng đang tìm kiếm việc làm ngành CNTT tại địa phương.
+    </p>
+    <div class="title-content d-flex align-items-center">
+        <img src="./assets/images/icon-script.png" class="m-0 mr-3" alt="icon">
+        <p>Chương trình</p>
+    </div>
+    <p>
+        - Giới thiệu về TMA + chương trình đào tạo cho sinh viên mới ra trường và chương trình thực tập
+    </p>
+    <p>
+        - Trình bày về chủ đề kỹ thuật
+    </p>
+    <p>
+        - Giao lưu, tư vấn và định hướng nghề nghiệp
+    </p>
+    <p>
+        - Phỏng vấn tuyển dụng
+    </p>
+    <p>
+        - Kiểm tra tiếng Anh (TOEIC)
+    </p>
+    <p>
+        - Trò chơi và trúng thưởng
+    </p>
+    <img src="assets/images/dinh-huong-nghe-nghiep-va-co-hoi-viec-lam-voi-TMA-solutions.png" class="img-fluid d-block" alt="">
+</div>
+<div class="other-news">
+        <h4 class="section-title">Tin tức & Sự kiện khác</h4>
+        <div class="card-container">
+            <div class="row">
+                <div class="col-md-6 col-lg-3 card-wrap">
+                    <a class="card" href="dinh-huong-nghe-nghiep-va-co-hoi-viec-lam-voi-TMA-solutions.html">
+                        <img class="card-img-top" src="assets/images/dinh-huong-nghe-nghiep-va-co-hoi-viec-lam-voi-TMA-solutions.png" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Định hướng nghề nghiệp và cơ hội việc làm với TMA Solutions</h5>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-6 col-lg-3 card-wrap">
+                    <a class="card" href="truong-dh-quy-nhon-dong-hanh-cung-tinh-binh-dinh-trong-thu-hut-dau-tu-nhat-ban.html">
+                        <img class="card-img-top" src="./assets/images/đồng hành cùng tỉnh bình định.png" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Trường ĐH QN đồng hành cùng tỉnh Bình Định trong thu hút đầu tư Nhật Bản</h5>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-6 col-lg-3 card-wrap">
+                        <a class="card" href="truong-dh-quy-nhon-dong-hanh-cung-tinh-binh-dinh-trong-thu-hut-dau-tu-nhat-ban.html">
+                            <img class="card-img-top" src="./assets/images/hoa anh dao.png" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">Anh đào nở vườn Haiku</h5>
+                            </div>
+                        </a>
+                </div>
+                <div class="col-md-6 col-lg-3 card-wrap">
+                    <a class="card" href="xuan-sang-khong-chi-co-hoa-anh-dao.html">
+                        <img class="card-img-top" src="assets/images/xuan-sang.png" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Xuân sang... không chỉ có hoa anh đào</h5>
+                        </div>
+                    </a>
+                </div>
+            </div>        
+        </div>
+</div>

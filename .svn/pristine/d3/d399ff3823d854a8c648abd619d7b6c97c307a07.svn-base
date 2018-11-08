@@ -1,0 +1,242 @@
+<div class="container">
+    <div class="banner">
+        <img class="img-responsive" src="/assets/images/course.png" alt="Course banner">
+        <div>
+          <div class="banner-bottom"></div>
+          <h1>
+              <b>Chương trình đào tạo</b>
+          </h1>
+      </div>
+      </div>
+      <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                  <a routerLink ="/trang-chu">Trang chủ</a>
+              </li>
+              <li class="breadcrumb-item active" aria-current="page">
+                  <a routerLink ="/khoa-hoc">Khóa học</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Các khóa tiếng Nhật JLPT</li>
+          </ol>
+      </nav>
+      <hr>
+      <div class="row">
+       <div class="col-md-4 col-lg-3 ">
+          <ul class="nav nav-tabs d-none d-md-block">
+              <li class="nav-item">
+                  <a class="nav-link" id="JCenter-tab" routerLink = "/khoa-hoc/cac-khoa-tieng-nhat-JLPT">Các khóa tiếng Nhật JLPT</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" id="JCenter-tab" routerLink = "/khoa-hoc/tieng-nhat-cho-thieu-nhi">Tiếng Nhật cho thiếu nhi</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" id="JCenter-tab" routerLink = "/khoa-hoc/cac-khoa-ky-nang-mem">Các khóa kỹ năng mềm</a>
+              </li>
+          </ul>
+       </div>
+  <div class="col-md-8 col-lg-9">
+    <h4 class="section-title"> Các khóa tiếng Nhật JLPT </h4>
+    <div class="row">
+      <div class="col-md-6">
+        <a class="card course-block card-wrap" routerLink="/khoa-hoc/cac-khoa-tieng-nhat-JLPT/khoa-hoc-tieng-nhat-n51" >
+          <h5 class="card-title">Khóa tiếng Nhật N5.1</h5>
+          <div class="course-description">
+            <p>(Dành cho người mới bắt đầu)</p>
+            Kỹ năng đạt được: Có thể viết và đọc hiểu được đoạn văn, câu văn kiểu mẫu được viết bằng Hán tự cơ bản dùng trong đời sống
+            hàng ngày hoặc được...
+            <span class="read-more">Đọc tiếp</span>
+          </div>
+          <hr>
+          <div class="opening-schedule">
+            <ul>
+              <li>
+                <span>
+                  <img src="/assets/images/clock-icon.png" alt="">
+                </span>
+                Thời lượng: 72 giờ
+              </li>
+              <li>
+                <span>
+                  <img src="/assets/images/calendar-icon.png" alt="">
+                </span>
+                Thời gian: 18:30 đến 20:30 các ngày thứ 2-4-6 hoặc 3-5-7
+              </li>
+              <li>
+                <span>
+                  <img src="/assets/images/money-icon.png" alt="">
+                </span>
+                Học phí: 950.000 đồng / 72 giờ
+              </li>
+            </ul>
+          </div>
+        </a>
+      </div>
+        <div class="col-md-6">
+          <a class="card course-block card-wrap" routerLink="/khoa-hoc/cac-khoa-tieng-nhat-JLPT/khoa-hoc-tieng-nhat-n52">
+            <h5 class="card-title">Khóa tiếng Nhật N5.2</h5>
+            <div class="course-description">
+              <p>(Dành cho người đã có kiến thức N5 cơ bản)</p>
+              Kỹ năng đạt được: đọc hiểu được đoạn văn, câu văn kiểu mẫu được viết bằng Hán tự cơ bản dùng trong đời sống hàng ngày hoặc
+              được viết bằng...
+              <span class="read-more">Đọc tiếp</span>
+            </div>
+            <hr>
+            <div class="opening-schedule">
+              <ul>
+                <li>
+                  <span>
+                      <img src="/assets/images/clock-icon.png" alt="">
+                  </span>
+                  Thời lượng: 78 giờ
+                </li>
+                <li>
+                  <span>
+                      <img src="/assets/images/calendar-icon.png" alt="">
+                  </span>
+                  Thời gian: 18:30 đến 20:30 các ngày thứ 2-4-6 hoặc 3-5-7
+                </li>
+                <li>
+                  <span>
+                      <img src="/assets/images/money-icon.png" alt="">
+                  </span>
+                  Học phí: 1.050.000 đồng/ 78 giờ
+                </li>
+              </ul>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-6">
+          <a class="card course-block card-wrap"  routerLink="/khoa-hoc/cac-khoa-tieng-nhat-JLPT/khoa-hoc-tieng-nhat-n41">
+            <h5 class="card-title">Khóa tiếng Nhật N4.1</h5>
+            <div class="course-description">
+              <p>(Dành cho người đã có chứng chỉ N5 hoặc trình độ tương đương)</p>
+              Kỹ năng đạt được: Có thể đọc hiểu được đoạn văn chủ đề liên quan đến bản thân trong cuộc sống...
+              <span class="read-more">Đọc tiếp</span>
+            </div>
+            <hr>
+            <div class="opening-schedule">
+              <ul>
+                <li>
+                  <span>
+                      <img src="/assets/images/clock-icon.png" alt="">
+                  </span>
+                  Thời lượng: 72 giờ
+                </li>
+                <li>
+                  <span>
+                      <img src="/assets/images/calendar-icon.png" alt="">
+                  </span>
+                  Thời gian: 14:30 đến 16:30 các ngày thứ 2-4-6 hoặc 3-5-7
+                </li>
+                <li>
+                  <span>
+                      <img src="/assets/images/money-icon.png" alt="">
+                  </span>
+                  Học phí: 1.050.000/ 72 giờ
+                </li>
+              </ul>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-6">
+          <a class="card course-block card-wrap" routerLink="/khoa-hoc/cac-khoa-tieng-nhat-JLPT/khoa-hoc-tieng-nhat-n42">
+            <h5 class="card-title">Khóa tiếng Nhật N4.2</h5>
+            <div class="course-description">
+              <p>(Dành cho người đã hoàn thành khóa N4.1 hoặc trình độ tiếng Nhật tương đương)</p>
+              Kỹ năng đạt được: Có thể đọc hiểu được đoạn vănchủ đề liên quan đến bản thân trong cuộc sống
+              <span class="read-more">Đọc tiếp</span>
+            </div>
+            <hr>
+            <div class="opening-schedule">
+              <ul>
+                <li>
+                  <span>
+                      <img src="/assets/images/clock-icon.png" alt="">
+                  </span>
+                  Thời lượng: 78 giờ
+                </li>
+                <li>
+                  <span>
+                      <img src="/assets/images/calendar-icon.png" alt="">
+                  </span>
+                  Thời gian: 14:30 đến 16:30 các ngày thứ 2-4-6 hoặc 3-5-7
+                </li>
+                <li>
+                  <span>
+                      <img src="/assets/images/money-icon.png" alt="">
+                  </span>
+                  Học phí: 1.150.000/ 78 giờ
+                </li>
+              </ul>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-6">
+          <a class="card course-block card-wrap"  routerLink="/khoa-hoc/cac-khoa-tieng-nhat-JLPT/khoa-hoc-tieng-nhat-n31">
+            <h5 class="card-title">Khóa tiếng Nhật N3.1</h5>
+            <div class="course-description">
+              <p>(Dành cho người đã có chứng chỉ N4 hoặc trình độ tương đương)</p>
+              Kỹ năng đạt được: Có thể đọc hiểu, nghe hiểu được những nội dung cụ thể và những vấn đề...
+              <span class="read-more">Đọc tiếp</span>
+            </div>
+            <hr>
+            <div class="opening-schedule">
+              <ul>
+                <li>
+                  <span>
+                      <img src="/assets/images/clock-icon.png" alt="">
+                  </span>
+                  Thời lượng: 72 giờ
+                </li>
+                <li>
+                  <span>
+                      <img src="/assets/images/calendar-icon.png" alt="">
+                  </span>
+                  Thời gian: 15:00 đến 17:00 các ngày thứ 2-4-6 hoặc 3-5-7
+                </li>
+                <li>
+                  <span>
+                      <img src="/assets/images/money-icon.png" alt="">
+                  </span>
+                  Học phí: 1.150.000 đồng/ 72 giờ
+                </li>
+              </ul>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-6">
+          <a class="card course-block card-wrap"  routerLink="/khoa-hoc/cac-khoa-tieng-nhat-JLPT/khoa-hoc-tieng-nhat-n32">
+            <h5 class="card-title">Khóa tiếng Nhật N3.2</h5>
+            <div class="course-description">
+              <p>(Dành cho người đã hoàn thành khóa N3.1 hoặc có trình độ tương đương)</p>
+              Kỹ năng đạt được: Có thể đọc hiểu được những nội dung cụ thể và những vấn đề ngày thường...
+              <span class="read-more">Đọc tiếp</span>
+            </div>
+            <hr>
+            <div class="opening-schedule">
+              <ul>
+                <li>
+                  <span>
+                      <img src="/assets/images/clock-icon.png" alt="">
+                  </span>
+                  Thời lượng: 78 giờ
+                </li>
+                <li>
+                  <span>
+                      <img src="/assets/images/calendar-icon.png" alt="">
+                  </span>
+                  Thời gian: 15:00 đến 17:00 các ngày thứ 2-4-6 hoặc 3-5-7
+                </li>
+                <li>
+                  <span>
+                      <img src="/assets/images/money-icon.png" alt="">
+                  </span>
+                  Học phí: 1.250.000 đồng/ 78 giờ
+                </li>
+              </ul>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+</div>
+

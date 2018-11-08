@@ -1,0 +1,170 @@
+
+#slider-wrap .banner-bottom h1 {
+	text-align: left;
+	padding-left: 10px;
+}
+.banner {
+	position: relative;
+}
+.carousel-item.active {
+	display: block;
+}
+.carousel-inner {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+	margin-top: 3em;
+}
+.img-responsive {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+.banner .banner-bottom h1 {
+	position: absolute;
+	bottom: 0;
+	left: 100px;
+	color: white;
+	font-family: "Lemonada", sans-serif;
+	font-size: 30px;
+}
+
+.img-fluid {
+	max-width: 100%;
+	height: auto; 
+}
+
+.container{
+	margin-top: 2em;
+}
+.table td, .table th {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 0px #dee2e6;
+}
+.col-md-4{
+	margin-top: 25px
+}
+a{
+    padding-top: 28px;
+    padding-bottom: 0px;
+}
+
+.nav-link {
+    display: block;
+    padding: .5rem 1rem;
+   
+}
+
+.table a{
+	text-decoration: none;
+	color: black;
+}
+.table a:hover{
+	color: red;
+
+}
+
+.section-title {
+	font-size: 24px;
+	font-weight: 800;
+	padding: 28px 50px;
+	background: url(/images/flower-icon-1.png) no-repeat;
+	background-size: auto;
+}
+.banner {
+	position: relative;
+	
+}
+.img-responsive {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+.banner .banner-bottom {
+	position: absolute;
+	bottom:0;
+	left: -48px;
+	height: 43px;
+
+}
+.img-fluid {
+	max-width: 100%;
+	height: auto;
+}
+h1{
+	top: -43px;
+
+}
+strong {
+	font-weight: bold;
+	position: relative;
+	margin-left: 15px;
+	font-family: "Lemonada", sans-serif;
+	text-align: left;
+	color: white;
+	top: auto;
+}
+
+.breadcrumb {
+	background-color: transparent;
+	margin-top: 20px;
+}
+li {
+	list-style: none;
+	display: inline-block;
+}
+.breadcrumb-item a{
+	color: inherit;
+	text-decoration: none;
+}
+.breadcrumb-item a:hover{
+	color: red;
+}
+.breadcrumb .breadcrumb-item + .breadcrumb-item::before {
+	content: ">";
+}
+.banner .banner-bottom h1 {
+	position: relative;
+	color: white;
+	font-family: "Lemonada", sans-serif;
+ 
+}
+@media only screen and (max-width: 767px) {
+	
+	.banner-bottom > h1 {
+			font-size: 20px;        
+	}
+}
+@media only screen and (max-width: 767px)
+{
+.banner .banner-bottom > h1 {
+	padding: 7px 0;
+	text-align: center;
+	background-color: red
+}
+}
+@media only screen and (max-width: 767px)
+{
+.banner .banner-bottom  h1 {
+	text-align: center;
+	font-size: 16px;
+	margin-top: 53px;
+	left: initial;
+
+}
+}
+
+@media only screen and (max-width: 767px)
+{
+.banner .banner-bottom > img {
+	display: none !important;
+}
+}
+@media only screen and (max-width: 767px)
+{
+.banner .banner-bottom {
+	left: 0 !important;
+	width: 100% !important;
+}
+}

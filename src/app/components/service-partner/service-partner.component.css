@@ -1,0 +1,250 @@
+body {
+    font-family: 'Helvetica', Times,sans-serif;
+    font-weight: 400;
+    color: #000;
+    background-color:#fafafa;
+  }
+  ::ng-deep * {
+    box-sizing: border-box;
+} 
+::ng-deep #slider-service {
+    max-height: 500px;
+}
+::ng-deep #slider-service .carousel-indicators .active {
+    background-color: #fff;
+}
+::ng-deep #slider-service .carousel-indicators li {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 1px solid #fff;
+    margin-right: 12px;
+    margin-left: 12px;
+    background-color: transparent;
+    position: relative;
+    -webkit-box-flex: 0;
+    flex: 0 1 auto;
+    text-indent: -999px;
+    max-width: 1000px;
+} 
+::ng-deep #slider-service .carousel-indicators {
+    left: 32em;
+    right: initial;
+    margin-left: initial;
+    position: absolute;
+    bottom: -5px;
+    z-index: 2;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding-left: 0;
+    margin-right: 15%;
+    list-style: none;
+    max-width: 1000px;
+}
+::ng-deep .carousel-item.active {
+    display: block;
+}
+::ng-deep .carousel-inner {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    margin-top: 3em;
+}
+::ng-deep .img-responsive {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+::ng-deep h1 {
+    /* font-weight: bold; */
+    position: relative;
+    margin-left: 2em;
+    top: -54px;
+    color: white;
+    font-size: 30px; 
+    font-family: "Lemonada", sans-serif ;
+}
+@media only screen and (max-width: 767px) {
+    ::ng-deep #slider-service .carousel-indicators li {
+        width: 10px;
+        height: 10px;
+        margin-left: 5px;
+        margin-right: 5px;
+        bottom: 1em;
+    }
+    ::ng-deep #slider-service .carousel-indicators {
+        left: 172px;
+        bottom: -14px;
+        z-index: 2;
+    }
+    ::ng-deep .banner-service {
+        bottom: -3px;
+        margin-left: 0 !important;
+        width: 100% !important;
+        height: 44px;
+        background-color: rgb(188, 0, 45);
+        -webkit-transform: perspective(200px) rotateX(0deg); 
+    }
+    ::ng-deep .banner .banner-service > img {
+        display: none !important;
+    }
+    ::ng-deep h1 {
+        margin-left: 10px;
+        font-size: 14px;
+        margin-bottom: -34px;
+    }
+}
+::ng-deep .banner-service {    
+    width: 850px;
+    height: 63px;   
+    background-color: rgb(188, 0, 45);
+    border-bottom-width:1px;
+    -webkit-transform: perspective(200px) rotateX(-25deg);   
+    transform-origin: top left; 
+    margin-top: -45px;
+    margin-left: -25px;
+    /*opacity: 0.9;*/
+} 
+::ng-deep .carousel-control-prev-icon { 
+    display: none; 
+}
+::ng-deep .carousel-control-next-icon { 
+    display: none; 
+} 
+::ng-deep #slider-service .carousel-item {
+    transition: opacity 0.7s ease!important;
+    position: absolute!important;
+    display: block!important;
+    opacity: 0.7;
+ }
+
+::ng-deep #slider-service .carousel-item.active {
+    position: relative!important;
+    opacity: 1;
+  }
+
+ul, li {
+    margin: 0;
+    padding: 0;}
+li {
+    list-style: none;
+    display: block;
+    cursor: pointer;
+}
+a,a:visited{
+    color: black;
+    text-decoration:none;
+}
+a:hover{
+    color:#dc3545;
+    text-decoration: none;
+}
+.breadcrumb{
+    background-color: transparent;
+    margin-top: -37px;
+    font-size: 14px;
+    margin-left: -1px;
+    background-color: white;
+    font-family: Muli, sans-serif;
+}
+.breadcrumb .breadcrumb-item + .breadcrumb-item::before {
+    content: ">";
+}
+.breadcrumb-item a{
+    color: #000 !important;
+    font-weight: 600;
+}
+.breadcrumb-item a:hover{
+	color: red !important;
+}
+.section-title {
+    font-size: 24px;
+    font-weight: 800;
+    padding: 28px 50px;
+    background: url(https://japancenter.qnu.edu.vn/images/bg-title.png) no-repeat;
+    background-size: auto;
+    font-family: 'Muli', sans-serif;
+}
+@media only screen and (max-width: 543px) {
+    .section-title {
+        font-size: 17px;
+        background-size: 56px;
+        padding: 15px 40px;
+    }
+}
+
+.block-title {
+    font-family: "Lemonada", sans-serif;
+    font-size: 24px;
+    line-height: 1.5;
+    font-weight: bold;
+    color: #e11f26;
+}
+.nav-tabs {
+    padding: 20px 5px;
+    border: solid 1px #e5e5e5;
+    background-color: white;
+    margin-bottom: 30px;
+    display: block;
+    font-size: 15px;
+}
+.section-title {
+    font-size: 24px;
+    font-weight: 800;
+    padding: 28px 50px;
+    background: url(https://japancenter.qnu.edu.vn/images/bg-title.png) no-repeat;
+    background-size: auto;
+}
+@media only screen and (max-width: 543px) {
+    .section-title {
+        font-size: 17px;
+        background-size: 56px;
+        padding: 15px 40px;
+    }
+}
+
+.block-title {
+    font-family: "Lemonada", sans-serif;
+    font-size: 24px;
+    line-height: 1.5;
+    font-weight: bold;
+    color: #e11f26;
+}
+.course-content {
+    padding: 30px;
+    margin: 40px 0 60px;
+    border: 1px solid #e5e5e5;
+    background-color: white;
+}
+.tab-pane active{
+    margin-right: -25px;
+}
+.pt-3, .py-3 {
+    padding-top: 1rem!important;
+}
+
+.nav-link {
+    font-size: 18px;
+    display: block;
+    font-family: 'Muli', sans-serif;
+    line-height: normal;
+    font-stretch: 100%;
+}
+.nav-link.active {
+    background-color: transparent;
+    border-color: transparent;
+    font-weight: 600;
+}
+.nav-link.nav-link:hover {
+    color:#dc3545;
+}
+.nav-tabs .nav-link {
+    border: 1px solid transparent;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+}
+.nav-link.active:hover {
+    font-weight: 600 !important;
+    color: inherit !important;
+}

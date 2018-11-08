@@ -1,0 +1,15 @@
+
+<div class="custom-container">
+  <ngb-carousel id="slider-home" data-interval="3000">
+    <ng-template ngbSlide class="carousel-item">
+      <img class="img-responsive" src="./assets/images/home-slider-1.png" alt="Random first slide">
+    </ng-template>
+    <ng-template ngbSlide class="carousel-item">
+      <img class="img-responsive" src="./assets/images/home-slider-2.png" alt="Random second slide">
+    </ng-template> 
+  </ngb-carousel>
+  <div class="banner">
+    <div class="banner-home">
+    </div>
+  </div>
+</div>  

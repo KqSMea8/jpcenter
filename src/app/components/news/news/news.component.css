@@ -1,0 +1,64 @@
+.row {
+  margin-top: 2em;
+}
+.images-card-wrap {
+    padding-bottom: 10px;
+  }
+   .images-card-wrap .card-img-top {
+    max-height: 160px;
+    height: 100%;
+    -webkit-filter: grayscale(100%);
+     /* Safari 6.0 - 9.0  */
+    filter: grayscale(100%);
+  }
+   .recruitment {
+    background: url(https://japancenter.qnu.edu.vn/images/home/announce-image.jpg) no-repeat;
+    background-size: cover;
+    position: relative;
+    overflow: auto;
+    /* Nội dung vượt quá thì sẽ thêm thanh scroll vào thành phần. */
+  }
+  .img-responsive {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+  @media (min-width: 576px) {
+    .carousel-item active.img-responsive{
+        max-width: 540px;
+    }
+}
+   .recruitment .announce-wrapper {
+    background-color: rgba(255, 229, 235, 0.7);
+    max-width: 1000px;
+    margin: 25px auto;
+    padding: 35px 7% 15px 7%;
+    text-align: center;
+  }
+   .card-body .card-title{
+     color: #000;
+     font-size: 24px;
+     margin-bottom: .75rem;
+   }
+   .block-title {
+     font-family: "Lemonada", sans-serif;
+     font-size: 24 px;
+     line-height: 1.5;
+     font-weight: bold;
+     color: #e11f26;
+   }
+   .card {
+     display: block;
+     height: 100%;
+     border-radius: 0;
+   }
+   .card:hover {
+     -webkit-box-shadow: 0 0 40px 0 rgba(0, 0, 0, 0.1);
+     box-shadow: 0 0 40px 0 rgba(0, 0, 0, 0.1);
+     -webkit-transform: translateY(-5px);
+     -moz-transform: translateY(-5px);
+     -ms-transform: translateY(-5px);
+     -o-transform: translateY(-5px);
+     transform: translateY(-5px);
+     text-decoration: none;
+   } 

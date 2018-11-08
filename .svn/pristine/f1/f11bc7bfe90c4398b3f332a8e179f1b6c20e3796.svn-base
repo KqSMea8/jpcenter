@@ -1,0 +1,352 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ */
+/**
+ * @license Copyright (c) 2003-2018, CKSource - Frederico Knabben. All rights reserved.
+ * For licensing, see LICENSE.md.
+ */
+import { Component, Input, Output, NgZone, EventEmitter, forwardRef, ElementRef } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+export class CKEditorComponent {
+    /**
+     * @param {?} elementRef
+     * @param {?} ngZone
+     */
+    constructor(elementRef, ngZone) {
+        /**
+         * The initial data of the editor. Useful when not using the ngModel.
+         * See https://angular.io/api/forms/NgModel to learn more.
+         */
+        this.data = '';
+        /**
+         * Tag name of the editor component.
+         *
+         * The default tag is 'div'.
+         */
+        this.tagName = 'div';
+        /**
+         * Fires when the editor is ready. It corresponds with the `editor#ready`
+         * https://ckeditor.com/docs/ckeditor5/latest/api/module_core_editor_editor-Editor.html#event-ready
+         * event.
+         */
+        this.ready = new EventEmitter();
+        /**
+         * Fires when the content of the editor has changed. It corresponds with the `editor.model.document#change`
+         * https://ckeditor.com/docs/ckeditor5/latest/api/module_engine_model_document-Document.html#event-change
+         * event.
+         */
+        this.change = new EventEmitter();
+        /**
+         * Fires when the editing view of the editor is blurred. It corresponds with the `editor.editing.view.document#blur`
+         * https://ckeditor.com/docs/ckeditor5/latest/api/module_engine_view_document-Document.html#event-event:blur
+         * event.
+         */
+        this.blur = new EventEmitter();
+        /**
+         * Fires when the editing view of the editor is focused. It corresponds with the `editor.editing.view.document#focus`
+         * https://ckeditor.com/docs/ckeditor5/latest/api/module_engine_view_document-Document.html#event-event:focus
+         * event.
+         */
+        this.focus = new EventEmitter();
+        /**
+         * The instance of the editor created by this component.
+         */
+        this.editorInstance = null;
+        /**
+         * If the component is read–only before the editor instance is created, it remembers that state,
+         * so the editor can become read–only once it is ready.
+         */
+        this.initialIsDisabled = false;
+        this.ngZone = ngZone;
+        this.elementRef = elementRef;
+    }
+    /**
+     * When set `true`, the editor becomes read-only.
+     * See https://ckeditor.com/docs/ckeditor5/latest/api/module_core_editor_editor-Editor.html#member-isReadOnly
+     * to learn more.
+     * @param {?} isDisabled
+     * @return {?}
+     */
+    set disabled(isDisabled) {
+        this.setDisabledState(isDisabled);
+    }
+    /**
+     * @return {?}
+     */
+    get disabled() {
+        if (this.editorInstance) {
+            return this.editorInstance.isReadOnly;
+        }
+        return this.initialIsDisabled;
+    }
+    /**
+     * @return {?}
+     */
+    ngAfterViewInit() {
+        this.ngZone.runOutsideAngular(() => {
+            this.createEditor();
+        });
+    }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        if (this.editorInstance) {
+            this.editorInstance.destroy();
+            this.editorInstance = null;
+        }
+    }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    writeValue(value) {
+        // This method is called with the `null` value when the form resets.
+        // A component's responsibility is to restore to the initial state.
+        if (value === null) {
+            value = '';
+        }
+        // If already initialized.
+        if (this.editorInstance) {
+            this.editorInstance.setData(value);
+        }
+        else {
+            this.data = value;
+        }
+    }
+    /**
+     * @param {?} callback
+     * @return {?}
+     */
+    registerOnChange(callback) {
+        this.cvaOnChange = callback;
+    }
+    /**
+     * @param {?} callback
+     * @return {?}
+     */
+    registerOnTouched(callback) {
+        this.cvaOnTouched = callback;
+    }
+    /**
+     * @param {?} isDisabled
+     * @return {?}
+     */
+    setDisabledState(isDisabled) {
+        // If already initialized
+        if (this.editorInstance) {
+            this.editorInstance.isReadOnly = isDisabled;
+        }
+        else {
+            this.initialIsDisabled = isDisabled;
+        }
+    }
+    /**
+     * Creates the editor instance, sets initial editor data,
+     * then integrates the editor with the Angular component.
+     * @return {?}
+     */
+    createEditor() {
+        /** @type {?} */
+        const element = document.createElement(this.tagName);
+        this.elementRef.nativeElement.appendChild(element);
+        return /** @type {?} */ ((this.editor)).create(element, this.config).then(editor => {
+            this.editorInstance = editor;
+            editor.setData(this.data);
+            if (this.initialIsDisabled) {
+                editor.isReadOnly = this.initialIsDisabled;
+            }
+            this.ngZone.run(() => {
+                this.ready.emit(editor);
+            });
+            this.setUpEditorEvents(editor);
+        }).catch((err) => {
+            console.error(err.stack);
+        });
+    }
+    /**
+     * Integrates the editor with the component by attaching related event listeners.
+     * @param {?} editor
+     * @return {?}
+     */
+    setUpEditorEvents(editor) {
+        /** @type {?} */
+        const modelDocument = editor.model.document;
+        /** @type {?} */
+        const viewDocument = editor.editing.view.document;
+        modelDocument.on('change:data', (evt) => {
+            /** @type {?} */
+            const data = editor.getData();
+            this.ngZone.run(() => {
+                if (this.cvaOnChange) {
+                    this.cvaOnChange(data);
+                }
+                this.change.emit({ event: evt, editor });
+            });
+        });
+        viewDocument.on('focus', (evt) => {
+            this.ngZone.run(() => {
+                this.focus.emit({ event: evt, editor });
+            });
+        });
+        viewDocument.on('blur', (evt) => {
+            this.ngZone.run(() => {
+                if (this.cvaOnTouched) {
+                    this.cvaOnTouched();
+                }
+                this.blur.emit({ event: evt, editor });
+            });
+        });
+    }
+}
+CKEditorComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ckeditor',
+                template: '<ng-template></ng-template>',
+                // Integration with @angular/forms.
+                providers: [
+                    {
+                        provide: NG_VALUE_ACCESSOR,
+                        useExisting: forwardRef(() => CKEditorComponent),
+                        multi: true,
+                    }
+                ]
+            }] }
+];
+/** @nocollapse */
+CKEditorComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: NgZone }
+];
+CKEditorComponent.propDecorators = {
+    editor: [{ type: Input }],
+    config: [{ type: Input }],
+    data: [{ type: Input }],
+    tagName: [{ type: Input }],
+    disabled: [{ type: Input }],
+    ready: [{ type: Output }],
+    change: [{ type: Output }],
+    blur: [{ type: Output }],
+    focus: [{ type: Output }]
+};
+if (false) {
+    /**
+     * The reference to the DOM element created by the component.
+     * @type {?}
+     */
+    CKEditorComponent.prototype.elementRef;
+    /**
+     * The constructor of the editor to be used for the instance of the component.
+     * It can be e.g. the `ClassicEditorBuild`, `InlineEditorBuild` or some custom editor.
+     * @type {?}
+     */
+    CKEditorComponent.prototype.editor;
+    /**
+     * The configuration of the editor.
+     * See https://ckeditor.com/docs/ckeditor5/latest/api/module_core_editor_editorconfig-EditorConfig.html
+     * to learn more.
+     * @type {?}
+     */
+    CKEditorComponent.prototype.config;
+    /**
+     * The initial data of the editor. Useful when not using the ngModel.
+     * See https://angular.io/api/forms/NgModel to learn more.
+     * @type {?}
+     */
+    CKEditorComponent.prototype.data;
+    /**
+     * Tag name of the editor component.
+     *
+     * The default tag is 'div'.
+     * @type {?}
+     */
+    CKEditorComponent.prototype.tagName;
+    /**
+     * Fires when the editor is ready. It corresponds with the `editor#ready`
+     * https://ckeditor.com/docs/ckeditor5/latest/api/module_core_editor_editor-Editor.html#event-ready
+     * event.
+     * @type {?}
+     */
+    CKEditorComponent.prototype.ready;
+    /**
+     * Fires when the content of the editor has changed. It corresponds with the `editor.model.document#change`
+     * https://ckeditor.com/docs/ckeditor5/latest/api/module_engine_model_document-Document.html#event-change
+     * event.
+     * @type {?}
+     */
+    CKEditorComponent.prototype.change;
+    /**
+     * Fires when the editing view of the editor is blurred. It corresponds with the `editor.editing.view.document#blur`
+     * https://ckeditor.com/docs/ckeditor5/latest/api/module_engine_view_document-Document.html#event-event:blur
+     * event.
+     * @type {?}
+     */
+    CKEditorComponent.prototype.blur;
+    /**
+     * Fires when the editing view of the editor is focused. It corresponds with the `editor.editing.view.document#focus`
+     * https://ckeditor.com/docs/ckeditor5/latest/api/module_engine_view_document-Document.html#event-event:focus
+     * event.
+     * @type {?}
+     */
+    CKEditorComponent.prototype.focus;
+    /**
+     * The instance of the editor created by this component.
+     * @type {?}
+     */
+    CKEditorComponent.prototype.editorInstance;
+    /**
+     * If the component is read–only before the editor instance is created, it remembers that state,
+     * so the editor can become read–only once it is ready.
+     * @type {?}
+     */
+    CKEditorComponent.prototype.initialIsDisabled;
+    /**
+     * An instance of https://angular.io/api/core/NgZone to allow the interaction with the editor
+     * withing the Angular event loop.
+     * @type {?}
+     */
+    CKEditorComponent.prototype.ngZone;
+    /**
+     * A callback executed when the content of the editor changes. Part of the
+     * `ControlValueAccessor` (https://angular.io/api/forms/ControlValueAccessor) interface.
+     *
+     * Note: Unset unless the component uses the `ngModel`.
+     * @type {?}
+     */
+    CKEditorComponent.prototype.cvaOnChange;
+    /**
+     * A callback executed when the editor has been blurred. Part of the
+     * `ControlValueAccessor` (https://angular.io/api/forms/ControlValueAccessor) interface.
+     *
+     * Note: Unset unless the component uses the `ngModel`.
+     * @type {?}
+     */
+    CKEditorComponent.prototype.cvaOnTouched;
+}
+/**
+ * @record
+ */
+export function BlurEvent() { }
+/** @type {?} */
+BlurEvent.prototype.event;
+/** @type {?} */
+BlurEvent.prototype.editor;
+/**
+ * @record
+ */
+export function FocusEvent() { }
+/** @type {?} */
+FocusEvent.prototype.event;
+/** @type {?} */
+FocusEvent.prototype.editor;
+/**
+ * @record
+ */
+export function ChangeEvent() { }
+/** @type {?} */
+ChangeEvent.prototype.event;
+/** @type {?} */
+ChangeEvent.prototype.editor;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2tlZGl0b3IuY29tcG9uZW50LmpzIiwic291cmNlUm9vdCI6Im5nOi8vQGNrZWRpdG9yL2NrZWRpdG9yNS1hbmd1bGFyLyIsInNvdXJjZXMiOlsiY2tlZGl0b3IuY29tcG9uZW50LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7O0FBS0EsT0FBTyxFQUNOLFNBQVMsRUFDVCxLQUFLLEVBQ0wsTUFBTSxFQUNOLE1BQU0sRUFDTixZQUFZLEVBQ1osVUFBVSxFQUVWLFVBQVUsRUFDVixNQUFNLGVBQWUsQ0FBQztBQUV2QixPQUFPLEVBRU4saUJBQWlCLEVBQ2pCLE1BQU0sZ0JBQWdCLENBQUM7QUFpQnhCLE1BQU07Ozs7O0lBOEdMLFlBQWEsVUFBc0IsRUFBRSxNQUFjOzs7OztvQkF2Rm5DLEVBQUU7Ozs7Ozt1QkFPQyxLQUFLOzs7Ozs7cUJBd0JOLElBQUksWUFBWSxFQUFvQjs7Ozs7O3NCQU9SLElBQUksWUFBWSxFQUFlOzs7Ozs7b0JBT25DLElBQUksWUFBWSxFQUFhOzs7Ozs7cUJBTzNCLElBQUksWUFBWSxFQUFjOzs7OzhCQUt6QixJQUFJOzs7OztpQ0FNekIsS0FBSztRQXlCaEMsSUFBSSxDQUFDLE1BQU0sR0FBRyxNQUFNLENBQUM7UUFDckIsSUFBSSxDQUFDLFVBQVUsR0FBRyxVQUFVLENBQUM7S0FDN0I7Ozs7Ozs7O0lBNUVELElBQWEsUUFBUSxDQUFFLFVBQW1CO1FBQ3pDLElBQUksQ0FBQyxnQkFBZ0IsQ0FBRSxVQUFVLENBQUUsQ0FBQztLQUNwQzs7OztJQUVELElBQUksUUFBUTtRQUNYLEVBQUUsQ0FBQyxDQUFFLElBQUksQ0FBQyxjQUFlLENBQUMsQ0FBQyxDQUFDO1lBQzNCLE1BQU0sQ0FBQyxJQUFJLENBQUMsY0FBYyxDQUFDLFVBQVUsQ0FBQztTQUN0QztRQUVELE1BQU0sQ0FBQyxJQUFJLENBQUMsaUJBQWlCLENBQUM7S0FDOUI7Ozs7SUFxRUQsZUFBZTtRQUNkLElBQUksQ0FBQyxNQUFNLENBQUMsaUJBQWlCLENBQUUsR0FBRyxFQUFFO1lBQ25DLElBQUksQ0FBQyxZQUFZLEVBQUUsQ0FBQztTQUNwQixDQUFFLENBQUM7S0FDSjs7OztJQUdELFdBQVc7UUFDVixFQUFFLENBQUMsQ0FBRSxJQUFJLENBQUMsY0FBZSxDQUFDLENBQUMsQ0FBQztZQUMzQixJQUFJLENBQUMsY0FBYyxDQUFDLE9BQU8sRUFBRSxDQUFDO1lBQzlCLElBQUksQ0FBQyxjQUFjLEdBQUcsSUFBSSxDQUFDO1NBQzNCO0tBQ0Q7Ozs7O0lBR0QsVUFBVSxDQUFFLEtBQW9COzs7UUFHL0IsRUFBRSxDQUFDLENBQUUsS0FBSyxLQUFLLElBQUssQ0FBQyxDQUFDLENBQUM7WUFDdEIsS0FBSyxHQUFHLEVBQUUsQ0FBQztTQUNYOztRQUdELEVBQUUsQ0FBQyxDQUFFLElBQUksQ0FBQyxjQUFlLENBQUMsQ0FBQyxDQUFDO1lBQzNCLElBQUksQ0FBQyxjQUFjLENBQUMsT0FBTyxDQUFFLEtBQUssQ0FBRSxDQUFDO1NBQ3JDO1FBRUQsSUFBSSxDQUFDLENBQUM7WUFDTCxJQUFJLENBQUMsSUFBSSxHQUFHLEtBQUssQ0FBQztTQUNsQjtLQUNEOzs7OztJQUdELGdCQUFnQixDQUFFLFFBQWtDO1FBQ25ELElBQUksQ0FBQyxXQUFXLEdBQUcsUUFBUSxDQUFDO0tBQzVCOzs7OztJQUdELGlCQUFpQixDQUFFLFFBQW9CO1FBQ3RDLElBQUksQ0FBQyxZQUFZLEdBQUcsUUFBUSxDQUFDO0tBQzdCOzs7OztJQUdELGdCQUFnQixDQUFFLFVBQW1COztRQUVwQyxFQUFFLENBQUMsQ0FBRSxJQUFJLENBQUMsY0FBZSxDQUFDLENBQUMsQ0FBQztZQUMzQixJQUFJLENBQUMsY0FBYyxDQUFDLFVBQVUsR0FBRyxVQUFVLENBQUM7U0FDNUM7UUFFRCxJQUFJLENBQUMsQ0FBQztZQUNMLElBQUksQ0FBQyxpQkFBaUIsR0FBRyxVQUFVLENBQUM7U0FDcEM7S0FDRDs7Ozs7O0lBTU8sWUFBWTs7UUFDbkIsTUFBTSxPQUFPLEdBQUcsUUFBUSxDQUFDLGFBQWEsQ0FBRSxJQUFJLENBQUMsT0FBTyxDQUFFLENBQUM7UUFFdkQsSUFBSSxDQUFDLFVBQVUsQ0FBQyxhQUFhLENBQUMsV0FBVyxDQUFFLE9BQU8sQ0FBRSxDQUFDO1FBRXJELE1BQU0sb0JBQUMsSUFBSSxDQUFDLE1BQU0sR0FBRSxNQUFNLENBQUUsT0FBTyxFQUFFLElBQUksQ0FBQyxNQUFNLEVBQzlDLElBQUksQ0FBRSxNQUFNLENBQUMsRUFBRTtZQUNmLElBQUksQ0FBQyxjQUFjLEdBQUcsTUFBTSxDQUFDO1lBRTdCLE1BQU0sQ0FBQyxPQUFPLENBQUUsSUFBSSxDQUFDLElBQUksQ0FBRSxDQUFDO1lBRTVCLEVBQUUsQ0FBQyxDQUFFLElBQUksQ0FBQyxpQkFBa0IsQ0FBQyxDQUFDLENBQUM7Z0JBQzlCLE1BQU0sQ0FBQyxVQUFVLEdBQUcsSUFBSSxDQUFDLGlCQUFpQixDQUFDO2FBQzNDO1lBRUQsSUFBSSxDQUFDLE1BQU0sQ0FBQyxHQUFHLENBQUUsR0FBRyxFQUFFO2dCQUNyQixJQUFJLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBRSxNQUFNLENBQUUsQ0FBQzthQUMxQixDQUFFLENBQUM7WUFFSixJQUFJLENBQUMsaUJBQWlCLENBQUUsTUFBTSxDQUFFLENBQUM7U0FDakMsRUFDQSxLQUFLLENBQUUsQ0FBRSxHQUFVLEVBQUcsRUFBRTtZQUN4QixPQUFPLENBQUMsS0FBSyxDQUFFLEdBQUcsQ0FBQyxLQUFLLENBQUUsQ0FBQztTQUMzQixFQUFHOzs7Ozs7O0lBTUUsaUJBQWlCLENBQUUsTUFBd0I7O1FBQ2xELE1BQU0sYUFBYSxHQUFHLE1BQU0sQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDOztRQUM1QyxNQUFNLFlBQVksR0FBRyxNQUFNLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLENBQUM7UUFFbEQsYUFBYSxDQUFDLEVBQUUsQ0FBRSxhQUFhLEVBQUUsQ0FBRSxHQUF1QyxFQUFHLEVBQUU7O1lBQzlFLE1BQU0sSUFBSSxHQUFHLE1BQU0sQ0FBQyxPQUFPLEVBQUUsQ0FBQztZQUU5QixJQUFJLENBQUMsTUFBTSxDQUFDLEdBQUcsQ0FBRSxHQUFHLEVBQUU7Z0JBQ3JCLEVBQUUsQ0FBQyxDQUFFLElBQUksQ0FBQyxXQUFZLENBQUMsQ0FBQyxDQUFDO29CQUN4QixJQUFJLENBQUMsV0FBVyxDQUFFLElBQUksQ0FBRSxDQUFDO2lCQUN6QjtnQkFFRCxJQUFJLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBRSxFQUFFLEtBQUssRUFBRSxHQUFHLEVBQUUsTUFBTSxFQUFFLENBQUUsQ0FBQzthQUMzQyxDQUFFLENBQUM7U0FDSixDQUFFLENBQUM7UUFFSixZQUFZLENBQUMsRUFBRSxDQUFFLE9BQU8sRUFBRSxDQUFFLEdBQWlDLEVBQUcsRUFBRTtZQUNqRSxJQUFJLENBQUMsTUFBTSxDQUFDLEdBQUcsQ0FBRSxHQUFHLEVBQUU7Z0JBQ3JCLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFFLEVBQUUsS0FBSyxFQUFFLEdBQUcsRUFBRSxNQUFNLEVBQUUsQ0FBRSxDQUFDO2FBQzFDLENBQUUsQ0FBQztTQUNKLENBQUUsQ0FBQztRQUVKLFlBQVksQ0FBQyxFQUFFLENBQUUsTUFBTSxFQUFFLENBQUUsR0FBZ0MsRUFBRyxFQUFFO1lBQy9ELElBQUksQ0FBQyxNQUFNLENBQUMsR0FBRyxDQUFFLEdBQUcsRUFBRTtnQkFDckIsRUFBRSxDQUFDLENBQUUsSUFBSSxDQUFDLFlBQWEsQ0FBQyxDQUFDLENBQUM7b0JBQ3pCLElBQUksQ0FBQyxZQUFZLEVBQUUsQ0FBQztpQkFDcEI7Z0JBRUQsSUFBSSxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUUsRUFBRSxLQUFLLEVBQUUsR0FBRyxFQUFFLE1BQU0sRUFBRSxDQUFFLENBQUM7YUFDekMsQ0FBRSxDQUFDO1NBQ0osQ0FBRSxDQUFDOzs7O1lBdFBMLFNBQVMsU0FBRTtnQkFDWCxRQUFRLEVBQUUsVUFBVTtnQkFDcEIsUUFBUSxFQUFFLDZCQUE2Qjs7Z0JBR3ZDLFNBQVMsRUFBRTtvQkFDVjt3QkFDQyxPQUFPLEVBQUUsaUJBQWlCO3dCQUMxQixXQUFXLEVBQUUsVUFBVSxDQUFFLEdBQUcsRUFBRSxDQUFDLGlCQUFpQixDQUFFO3dCQUNsRCxLQUFLLEVBQUUsSUFBSTtxQkFDWDtpQkFDRDthQUNEOzs7O1lBdEJBLFVBQVU7WUFKVixNQUFNOzs7cUJBcUNMLEtBQUs7cUJBT0wsS0FBSzttQkFNTCxLQUFLO3NCQU9MLEtBQUs7dUJBT0wsS0FBSztvQkFpQkwsTUFBTTtxQkFPTixNQUFNO21CQU9OLE1BQU07b0JBT04sTUFBTSIsInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogQGxpY2Vuc2UgQ29weXJpZ2h0IChjKSAyMDAzLTIwMTgsIENLU291cmNlIC0gRnJlZGVyaWNvIEtuYWJiZW4uIEFsbCByaWdodHMgcmVzZXJ2ZWQuXG4gKiBGb3IgbGljZW5zaW5nLCBzZWUgTElDRU5TRS5tZC5cbiAqL1xuXG5pbXBvcnQge1xuXHRDb21wb25lbnQsXG5cdElucHV0LFxuXHRPdXRwdXQsXG5cdE5nWm9uZSxcblx0RXZlbnRFbWl0dGVyLFxuXHRmb3J3YXJkUmVmLFxuXHRBZnRlclZpZXdJbml0LCBPbkRlc3Ryb3ksXG5cdEVsZW1lbnRSZWZcbn0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5cbmltcG9ydCB7XG5cdENvbnRyb2xWYWx1ZUFjY2Vzc29yLFxuXHROR19WQUxVRV9BQ0NFU1NPUlxufSBmcm9tICdAYW5ndWxhci9mb3Jtcyc7XG5cbmltcG9ydCB7IENLRWRpdG9yNSB9IGZyb20gJy4vY2tlZGl0b3InO1xuXG5AQ29tcG9uZW50KCB7XG5cdHNlbGVjdG9yOiAnY2tlZGl0b3InLFxuXHR0ZW1wbGF0ZTogJzxuZy10ZW1wbGF0ZT48L25nLXRlbXBsYXRlPicsXG5cblx0Ly8gSW50ZWdyYXRpb24gd2l0aCBAYW5ndWxhci9mb3Jtcy5cblx0cHJvdmlkZXJzOiBbXG5cdFx0e1xuXHRcdFx0cHJvdmlkZTogTkdfVkFMVUVfQUNDRVNTT1IsXG5cdFx0XHR1c2VFeGlzdGluZzogZm9yd2FyZFJlZiggKCkgPT4gQ0tFZGl0b3JDb21wb25lbnQgKSxcblx0XHRcdG11bHRpOiB0cnVlLFxuXHRcdH1cblx0XVxufSApXG5leHBvcnQgY2xhc3MgQ0tFZGl0b3JDb21wb25lbnQgaW1wbGVtZW50cyBBZnRlclZpZXdJbml0LCBPbkRlc3Ryb3ksIENvbnRyb2xWYWx1ZUFjY2Vzc29yIHtcblx0LyoqXG5cdCAqIFRoZSByZWZlcmVuY2UgdG8gdGhlIERPTSBlbGVtZW50IGNyZWF0ZWQgYnkgdGhlIGNvbXBvbmVudC5cblx0ICovXG5cdHByaXZhdGUgZWxlbWVudFJlZiE6IEVsZW1lbnRSZWY8SFRNTEVsZW1lbnQ+O1xuXG5cdC8qKlxuXHQgKiBUaGUgY29uc3RydWN0b3Igb2YgdGhlIGVkaXRvciB0byBiZSB1c2VkIGZvciB0aGUgaW5zdGFuY2Ugb2YgdGhlIGNvbXBvbmVudC5cblx0ICogSXQgY2FuIGJlIGUuZy4gdGhlIGBDbGFzc2ljRWRpdG9yQnVpbGRgLCBgSW5saW5lRWRpdG9yQnVpbGRgIG9yIHNvbWUgY3VzdG9tIGVkaXRvci5cblx0ICovXG5cdEBJbnB1dCgpIGVkaXRvcj86IENLRWRpdG9yNS5FZGl0b3JDb25zdHJ1Y3RvcjtcblxuXHQvKipcblx0ICogVGhlIGNvbmZpZ3VyYXRpb24gb2YgdGhlIGVkaXRvci5cblx0ICogU2VlIGh0dHBzOi8vY2tlZGl0b3IuY29tL2RvY3MvY2tlZGl0b3I1L2xhdGVzdC9hcGkvbW9kdWxlX2NvcmVfZWRpdG9yX2VkaXRvcmNvbmZpZy1FZGl0b3JDb25maWcuaHRtbFxuXHQgKiB0byBsZWFybiBtb3JlLlxuXHQgKi9cblx0QElucHV0KCkgY29uZmlnPzogQ0tFZGl0b3I1LkNvbmZpZztcblxuXHQvKipcblx0ICogVGhlIGluaXRpYWwgZGF0YSBvZiB0aGUgZWRpdG9yLiBVc2VmdWwgd2hlbiBub3QgdXNpbmcgdGhlIG5nTW9kZWwuXG5cdCAqIFNlZSBodHRwczovL2FuZ3VsYXIuaW8vYXBpL2Zvcm1zL05nTW9kZWwgdG8gbGVhcm4gbW9yZS5cblx0ICovXG5cdEBJbnB1dCgpIGRhdGEgPSAnJztcblxuXHQvKipcblx0ICogVGFnIG5hbWUgb2YgdGhlIGVkaXRvciBjb21wb25lbnQuXG5cdCAqXG5cdCAqIFRoZSBkZWZhdWx0IHRhZyBpcyAnZGl2Jy5cblx0ICovXG5cdEBJbnB1dCgpIHRhZ05hbWUgPSAnZGl2JztcblxuXHQvKipcblx0ICogV2hlbiBzZXQgYHRydWVgLCB0aGUgZWRpdG9yIGJlY29tZXMgcmVhZC1vbmx5LlxuXHQgKiBTZWUgaHR0cHM6Ly9ja2VkaXRvci5jb20vZG9jcy9ja2VkaXRvcjUvbGF0ZXN0L2FwaS9tb2R1bGVfY29yZV9lZGl0b3JfZWRpdG9yLUVkaXRvci5odG1sI21lbWJlci1pc1JlYWRPbmx5XG5cdCAqIHRvIGxlYXJuIG1vcmUuXG5cdCAqL1xuXHRASW5wdXQoKSBzZXQgZGlzYWJsZWQoIGlzRGlzYWJsZWQ6IGJvb2xlYW4gKSB7XG5cdFx0dGhpcy5zZXREaXNhYmxlZFN0YXRlKCBpc0Rpc2FibGVkICk7XG5cdH1cblxuXHRnZXQgZGlzYWJsZWQoKSB7XG5cdFx0aWYgKCB0aGlzLmVkaXRvckluc3RhbmNlICkge1xuXHRcdFx0cmV0dXJuIHRoaXMuZWRpdG9ySW5zdGFuY2UuaXNSZWFkT25seTtcblx0XHR9XG5cblx0XHRyZXR1cm4gdGhpcy5pbml0aWFsSXNEaXNhYmxlZDtcblx0fVxuXG5cdC8qKlxuXHQgKiBGaXJlcyB3aGVuIHRoZSBlZGl0b3IgaXMgcmVhZHkuIEl0IGNvcnJlc3BvbmRzIHdpdGggdGhlIGBlZGl0b3IjcmVhZHlgXG5cdCAqIGh0dHBzOi8vY2tlZGl0b3IuY29tL2RvY3MvY2tlZGl0b3I1L2xhdGVzdC9hcGkvbW9kdWxlX2NvcmVfZWRpdG9yX2VkaXRvci1FZGl0b3IuaHRtbCNldmVudC1yZWFkeVxuXHQgKiBldmVudC5cblx0ICovXG5cdEBPdXRwdXQoKSByZWFkeSA9IG5ldyBFdmVudEVtaXR0ZXI8Q0tFZGl0b3I1LkVkaXRvcj4oKTtcblxuXHQvKipcblx0ICogRmlyZXMgd2hlbiB0aGUgY29udGVudCBvZiB0aGUgZWRpdG9yIGhhcyBjaGFuZ2VkLiBJdCBjb3JyZXNwb25kcyB3aXRoIHRoZSBgZWRpdG9yLm1vZGVsLmRvY3VtZW50I2NoYW5nZWBcblx0ICogaHR0cHM6Ly9ja2VkaXRvci5jb20vZG9jcy9ja2VkaXRvcjUvbGF0ZXN0L2FwaS9tb2R1bGVfZW5naW5lX21vZGVsX2RvY3VtZW50LURvY3VtZW50Lmh0bWwjZXZlbnQtY2hhbmdlXG5cdCAqIGV2ZW50LlxuXHQgKi9cblx0QE91dHB1dCgpIGNoYW5nZTogRXZlbnRFbWl0dGVyPENoYW5nZUV2ZW50PiA9IG5ldyBFdmVudEVtaXR0ZXI8Q2hhbmdlRXZlbnQ+KCk7XG5cblx0LyoqXG5cdCAqIEZpcmVzIHdoZW4gdGhlIGVkaXRpbmcgdmlldyBvZiB0aGUgZWRpdG9yIGlzIGJsdXJyZWQuIEl0IGNvcnJlc3BvbmRzIHdpdGggdGhlIGBlZGl0b3IuZWRpdGluZy52aWV3LmRvY3VtZW50I2JsdXJgXG5cdCAqIGh0dHBzOi8vY2tlZGl0b3IuY29tL2RvY3MvY2tlZGl0b3I1L2xhdGVzdC9hcGkvbW9kdWxlX2VuZ2luZV92aWV3X2RvY3VtZW50LURvY3VtZW50Lmh0bWwjZXZlbnQtZXZlbnQ6Ymx1clxuXHQgKiBldmVudC5cblx0ICovXG5cdEBPdXRwdXQoKSBibHVyOiBFdmVudEVtaXR0ZXI8Qmx1ckV2ZW50PiA9IG5ldyBFdmVudEVtaXR0ZXI8Qmx1ckV2ZW50PigpO1xuXG5cdC8qKlxuXHQgKiBGaXJlcyB3aGVuIHRoZSBlZGl0aW5nIHZpZXcgb2YgdGhlIGVkaXRvciBpcyBmb2N1c2VkLiBJdCBjb3JyZXNwb25kcyB3aXRoIHRoZSBgZWRpdG9yLmVkaXRpbmcudmlldy5kb2N1bWVudCNmb2N1c2Bcblx0ICogaHR0cHM6Ly9ja2VkaXRvci5jb20vZG9jcy9ja2VkaXRvcjUvbGF0ZXN0L2FwaS9tb2R1bGVfZW5naW5lX3ZpZXdfZG9jdW1lbnQtRG9jdW1lbnQuaHRtbCNldmVudC1ldmVudDpmb2N1c1xuXHQgKiBldmVudC5cblx0ICovXG5cdEBPdXRwdXQoKSBmb2N1czogRXZlbnRFbWl0dGVyPEZvY3VzRXZlbnQ+ID0gbmV3IEV2ZW50RW1pdHRlcjxGb2N1c0V2ZW50PigpO1xuXG5cdC8qKlxuXHQgKiBUaGUgaW5zdGFuY2Ugb2YgdGhlIGVkaXRvciBjcmVhdGVkIGJ5IHRoaXMgY29tcG9uZW50LlxuXHQgKi9cblx0cHVibGljIGVkaXRvckluc3RhbmNlOiBDS0VkaXRvcjUuRWRpdG9yIHwgbnVsbCA9IG51bGw7XG5cblx0LyoqXG5cdCAqIElmIHRoZSBjb21wb25lbnQgaXMgcmVhZOKAk29ubHkgYmVmb3JlIHRoZSBlZGl0b3IgaW5zdGFuY2UgaXMgY3JlYXRlZCwgaXQgcmVtZW1iZXJzIHRoYXQgc3RhdGUsXG5cdCAqIHNvIHRoZSBlZGl0b3IgY2FuIGJlY29tZSByZWFk4oCTb25seSBvbmNlIGl0IGlzIHJlYWR5LlxuXHQgKi9cblx0cHJpdmF0ZSBpbml0aWFsSXNEaXNhYmxlZCA9IGZhbHNlO1xuXG5cdC8qKlxuXHQgKiBBbiBpbnN0YW5jZSBvZiBodHRwczovL2FuZ3VsYXIuaW8vYXBpL2NvcmUvTmdab25lIHRvIGFsbG93IHRoZSBpbnRlcmFjdGlvbiB3aXRoIHRoZSBlZGl0b3Jcblx0ICogd2l0aGluZyB0aGUgQW5ndWxhciBldmVudCBsb29wLlxuXHQgKi9cblx0cHJpdmF0ZSBuZ1pvbmU6IE5nWm9uZTtcblxuXHQvKipcblx0ICogQSBjYWxsYmFjayBleGVjdXRlZCB3aGVuIHRoZSBjb250ZW50IG9mIHRoZSBlZGl0b3IgY2hhbmdlcy4gUGFydCBvZiB0aGVcblx0ICogYENvbnRyb2xWYWx1ZUFjY2Vzc29yYCAoaHR0cHM6Ly9hbmd1bGFyLmlvL2FwaS9mb3Jtcy9Db250cm9sVmFsdWVBY2Nlc3NvcikgaW50ZXJmYWNlLlxuXHQgKlxuXHQgKiBOb3RlOiBVbnNldCB1bmxlc3MgdGhlIGNvbXBvbmVudCB1c2VzIHRoZSBgbmdNb2RlbGAuXG5cdCAqL1xuXHRwcml2YXRlIGN2YU9uQ2hhbmdlPzogKCBkYXRhOiBzdHJpbmcgKSA9PiB2b2lkO1xuXG5cdC8qKlxuXHQgKiBBIGNhbGxiYWNrIGV4ZWN1dGVkIHdoZW4gdGhlIGVkaXRvciBoYXMgYmVlbiBibHVycmVkLiBQYXJ0IG9mIHRoZVxuXHQgKiBgQ29udHJvbFZhbHVlQWNjZXNzb3JgIChodHRwczovL2FuZ3VsYXIuaW8vYXBpL2Zvcm1zL0NvbnRyb2xWYWx1ZUFjY2Vzc29yKSBpbnRlcmZhY2UuXG5cdCAqXG5cdCAqIE5vdGU6IFVuc2V0IHVubGVzcyB0aGUgY29tcG9uZW50IHVzZXMgdGhlIGBuZ01vZGVsYC5cblx0ICovXG5cdHByaXZhdGUgY3ZhT25Ub3VjaGVkPzogKCkgPT4gdm9pZDtcblxuXHRjb25zdHJ1Y3RvciggZWxlbWVudFJlZjogRWxlbWVudFJlZiwgbmdab25lOiBOZ1pvbmUgKSB7XG5cdFx0dGhpcy5uZ1pvbmUgPSBuZ1pvbmU7XG5cdFx0dGhpcy5lbGVtZW50UmVmID0gZWxlbWVudFJlZjtcblx0fVxuXG5cdC8vIEltcGxlbWVudGluZyB0aGUgQWZ0ZXJWaWV3SW5pdCBpbnRlcmZhY2UuXG5cdG5nQWZ0ZXJWaWV3SW5pdCgpIHtcblx0XHR0aGlzLm5nWm9uZS5ydW5PdXRzaWRlQW5ndWxhciggKCkgPT4ge1xuXHRcdFx0dGhpcy5jcmVhdGVFZGl0b3IoKTtcblx0XHR9ICk7XG5cdH1cblxuXHQvLyBJbXBsZW1lbnRpbmcgdGhlIE9uRGVzdHJveSBpbnRlcmZhY2UuXG5cdG5nT25EZXN0cm95KCkge1xuXHRcdGlmICggdGhpcy5lZGl0b3JJbnN0YW5jZSApIHtcblx0XHRcdHRoaXMuZWRpdG9ySW5zdGFuY2UuZGVzdHJveSgpO1xuXHRcdFx0dGhpcy5lZGl0b3JJbnN0YW5jZSA9IG51bGw7XG5cdFx0fVxuXHR9XG5cblx0Ly8gSW1wbGVtZW50aW5nIHRoZSBDb250cm9sVmFsdWVBY2Nlc3NvciBpbnRlcmZhY2UgKG9ubHkgd2hlbiBiaW5kaW5nIHRvIG5nTW9kZWwpLlxuXHR3cml0ZVZhbHVlKCB2YWx1ZTogc3RyaW5nIHwgbnVsbCApOiB2b2lkIHtcblx0XHQvLyBUaGlzIG1ldGhvZCBpcyBjYWxsZWQgd2l0aCB0aGUgYG51bGxgIHZhbHVlIHdoZW4gdGhlIGZvcm0gcmVzZXRzLlxuXHRcdC8vIEEgY29tcG9uZW50J3MgcmVzcG9uc2liaWxpdHkgaXMgdG8gcmVzdG9yZSB0byB0aGUgaW5pdGlhbCBzdGF0ZS5cblx0XHRpZiAoIHZhbHVlID09PSBudWxsICkge1xuXHRcdFx0dmFsdWUgPSAnJztcblx0XHR9XG5cblx0XHQvLyBJZiBhbHJlYWR5IGluaXRpYWxpemVkLlxuXHRcdGlmICggdGhpcy5lZGl0b3JJbnN0YW5jZSApIHtcblx0XHRcdHRoaXMuZWRpdG9ySW5zdGFuY2Uuc2V0RGF0YSggdmFsdWUgKTtcblx0XHR9XG5cdFx0Ly8gSWYgbm90LCB3YWl0IGZvciBpdCB0byBiZSByZWFkeTsgc3RvcmUgdGhlIGRhdGEuXG5cdFx0ZWxzZSB7XG5cdFx0XHR0aGlzLmRhdGEgPSB2YWx1ZTtcblx0XHR9XG5cdH1cblxuXHQvLyBJbXBsZW1lbnRpbmcgdGhlIENvbnRyb2xWYWx1ZUFjY2Vzc29yIGludGVyZmFjZSAob25seSB3aGVuIGJpbmRpbmcgdG8gbmdNb2RlbCkuXG5cdHJlZ2lzdGVyT25DaGFuZ2UoIGNhbGxiYWNrOiAoIGRhdGE6IHN0cmluZyApID0+IHZvaWQgKTogdm9pZCB7XG5cdFx0dGhpcy5jdmFPbkNoYW5nZSA9IGNhbGxiYWNrO1xuXHR9XG5cblx0Ly8gSW1wbGVtZW50aW5nIHRoZSBDb250cm9sVmFsdWVBY2Nlc3NvciBpbnRlcmZhY2UgKG9ubHkgd2hlbiBiaW5kaW5nIHRvIG5nTW9kZWwpLlxuXHRyZWdpc3Rlck9uVG91Y2hlZCggY2FsbGJhY2s6ICgpID0+IHZvaWQgKTogdm9pZCB7XG5cdFx0dGhpcy5jdmFPblRvdWNoZWQgPSBjYWxsYmFjaztcblx0fVxuXG5cdC8vIEltcGxlbWVudGluZyB0aGUgQ29udHJvbFZhbHVlQWNjZXNzb3IgaW50ZXJmYWNlIChvbmx5IHdoZW4gYmluZGluZyB0byBuZ01vZGVsKS5cblx0c2V0RGlzYWJsZWRTdGF0ZSggaXNEaXNhYmxlZDogYm9vbGVhbiApOiB2b2lkIHtcblx0XHQvLyBJZiBhbHJlYWR5IGluaXRpYWxpemVkXG5cdFx0aWYgKCB0aGlzLmVkaXRvckluc3RhbmNlICkge1xuXHRcdFx0dGhpcy5lZGl0b3JJbnN0YW5jZS5pc1JlYWRPbmx5ID0gaXNEaXNhYmxlZDtcblx0XHR9XG5cdFx0Ly8gSWYgbm90LCB3YWl0IGZvciBpdCB0byBiZSByZWFkeTsgc3RvcmUgdGhlIHN0YXRlLlxuXHRcdGVsc2Uge1xuXHRcdFx0dGhpcy5pbml0aWFsSXNEaXNhYmxlZCA9IGlzRGlzYWJsZWQ7XG5cdFx0fVxuXHR9XG5cblx0LyoqXG5cdCAqIENyZWF0ZXMgdGhlIGVkaXRvciBpbnN0YW5jZSwgc2V0cyBpbml0aWFsIGVkaXRvciBkYXRhLFxuXHQgKiB0aGVuIGludGVncmF0ZXMgdGhlIGVkaXRvciB3aXRoIHRoZSBBbmd1bGFyIGNvbXBvbmVudC5cblx0ICovXG5cdHByaXZhdGUgY3JlYXRlRWRpdG9yKCk6IFByb21pc2U8YW55PiB7XG5cdFx0Y29uc3QgZWxlbWVudCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoIHRoaXMudGFnTmFtZSApO1xuXG5cdFx0dGhpcy5lbGVtZW50UmVmLm5hdGl2ZUVsZW1lbnQuYXBwZW5kQ2hpbGQoIGVsZW1lbnQgKTtcblxuXHRcdHJldHVybiB0aGlzLmVkaXRvciEuY3JlYXRlKCBlbGVtZW50LCB0aGlzLmNvbmZpZyApXG5cdFx0XHQudGhlbiggZWRpdG9yID0+IHtcblx0XHRcdFx0dGhpcy5lZGl0b3JJbnN0YW5jZSA9IGVkaXRvcjtcblxuXHRcdFx0XHRlZGl0b3Iuc2V0RGF0YSggdGhpcy5kYXRhICk7XG5cblx0XHRcdFx0aWYgKCB0aGlzLmluaXRpYWxJc0Rpc2FibGVkICkge1xuXHRcdFx0XHRcdGVkaXRvci5pc1JlYWRPbmx5ID0gdGhpcy5pbml0aWFsSXNEaXNhYmxlZDtcblx0XHRcdFx0fVxuXG5cdFx0XHRcdHRoaXMubmdab25lLnJ1biggKCkgPT4ge1xuXHRcdFx0XHRcdHRoaXMucmVhZHkuZW1pdCggZWRpdG9yICk7XG5cdFx0XHRcdH0gKTtcblxuXHRcdFx0XHR0aGlzLnNldFVwRWRpdG9yRXZlbnRzKCBlZGl0b3IgKTtcblx0XHRcdH0gKVxuXHRcdFx0LmNhdGNoKCAoIGVycjogRXJyb3IgKSA9PiB7XG5cdFx0XHRcdGNvbnNvbGUuZXJyb3IoIGVyci5zdGFjayApO1xuXHRcdFx0fSApO1xuXHR9XG5cblx0LyoqXG5cdCAqIEludGVncmF0ZXMgdGhlIGVkaXRvciB3aXRoIHRoZSBjb21wb25lbnQgYnkgYXR0YWNoaW5nIHJlbGF0ZWQgZXZlbnQgbGlzdGVuZXJzLlxuXHQgKi9cblx0cHJpdmF0ZSBzZXRVcEVkaXRvckV2ZW50cyggZWRpdG9yOiBDS0VkaXRvcjUuRWRpdG9yICk6IHZvaWQge1xuXHRcdGNvbnN0IG1vZGVsRG9jdW1lbnQgPSBlZGl0b3IubW9kZWwuZG9jdW1lbnQ7XG5cdFx0Y29uc3Qgdmlld0RvY3VtZW50ID0gZWRpdG9yLmVkaXRpbmcudmlldy5kb2N1bWVudDtcblxuXHRcdG1vZGVsRG9jdW1lbnQub24oICdjaGFuZ2U6ZGF0YScsICggZXZ0OiBDS0VkaXRvcjUuRXZlbnRJbmZvPCdjaGFuZ2U6ZGF0YSc+ICkgPT4ge1xuXHRcdFx0Y29uc3QgZGF0YSA9IGVkaXRvci5nZXREYXRhKCk7XG5cblx0XHRcdHRoaXMubmdab25lLnJ1biggKCkgPT4ge1xuXHRcdFx0XHRpZiAoIHRoaXMuY3ZhT25DaGFuZ2UgKSB7XG5cdFx0XHRcdFx0dGhpcy5jdmFPbkNoYW5nZSggZGF0YSApO1xuXHRcdFx0XHR9XG5cblx0XHRcdFx0dGhpcy5jaGFuZ2UuZW1pdCggeyBldmVudDogZXZ0LCBlZGl0b3IgfSApO1xuXHRcdFx0fSApO1xuXHRcdH0gKTtcblxuXHRcdHZpZXdEb2N1bWVudC5vbiggJ2ZvY3VzJywgKCBldnQ6IENLRWRpdG9yNS5FdmVudEluZm88J2ZvY3VzJz4gKSA9PiB7XG5cdFx0XHR0aGlzLm5nWm9uZS5ydW4oICgpID0+IHtcblx0XHRcdFx0dGhpcy5mb2N1cy5lbWl0KCB7IGV2ZW50OiBldnQsIGVkaXRvciB9ICk7XG5cdFx0XHR9ICk7XG5cdFx0fSApO1xuXG5cdFx0dmlld0RvY3VtZW50Lm9uKCAnYmx1cicsICggZXZ0OiBDS0VkaXRvcjUuRXZlbnRJbmZvPCdibHVyJz4gKSA9PiB7XG5cdFx0XHR0aGlzLm5nWm9uZS5ydW4oICgpID0+IHtcblx0XHRcdFx0aWYgKCB0aGlzLmN2YU9uVG91Y2hlZCApIHtcblx0XHRcdFx0XHR0aGlzLmN2YU9uVG91Y2hlZCgpO1xuXHRcdFx0XHR9XG5cblx0XHRcdFx0dGhpcy5ibHVyLmVtaXQoIHsgZXZlbnQ6IGV2dCwgZWRpdG9yIH0gKTtcblx0XHRcdH0gKTtcblx0XHR9ICk7XG5cdH1cbn1cblxuZXhwb3J0IGludGVyZmFjZSBCbHVyRXZlbnQge1xuXHRldmVudDogQ0tFZGl0b3I1LkV2ZW50SW5mbzwnYmx1cic+O1xuXHRlZGl0b3I6IENLRWRpdG9yNS5FZGl0b3I7XG59XG5cbmV4cG9ydCBpbnRlcmZhY2UgRm9jdXNFdmVudCB7XG5cdGV2ZW50OiBDS0VkaXRvcjUuRXZlbnRJbmZvPCdmb2N1cyc+O1xuXHRlZGl0b3I6IENLRWRpdG9yNS5FZGl0b3I7XG59XG5cbmV4cG9ydCBpbnRlcmZhY2UgQ2hhbmdlRXZlbnQge1xuXHRldmVudDogQ0tFZGl0b3I1LkV2ZW50SW5mbzwnY2hhbmdlOmRhdGEnPjtcblx0ZWRpdG9yOiBDS0VkaXRvcjUuRWRpdG9yO1xufVxuIl19

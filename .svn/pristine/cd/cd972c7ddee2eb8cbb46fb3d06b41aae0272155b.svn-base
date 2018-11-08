@@ -1,0 +1,70 @@
+/*max-width: 320px (điện thoại di động, hiển thị chiều dọc)
+max-width: 480px (điện thoại di động, hiển thị chiều ngang)
+max-width: 600px (máy tính bảng, hiển thị chiều dọc)
+max-width: 800px (máy tính bảng, hiển thị chiều ngang)
+max-width: 768px (máy tính bảng loại to, hiển thị chiều dọc)
+max-width: 1024px (máy tính bảng loại to, hiển thị chiều ngang)
+min-width: 1025px (từ size này trở lên là danh cho desktop thông thường)*/
+
+
+
+/* Các CSS này dành cho toàn bộ website và desktop */
+footer {
+    background-color: rgb(250, 253, 255);
+    font-family: 'Helvetica', Times,sans-serif;
+    bottom: 0;
+    max-height: 30em;
+    height: 11.5em;
+    height: auto;
+    border-top: 1px solid #e5e5e5;
+    clear: both;
+  }
+.container{
+  min-height:100%;
+   position:relative;
+}
+.logo {
+  margin-top: 1em;
+  width: 65px;
+  height: 68px;
+}
+
+.mr-2 {
+  padding: 0.5em;
+  width: 70px;
+  height: 62px;
+}
+
+#backToTop {
+  display: none;    /* Mặc định button sẽ bị ẩn*/
+  position: fixed;
+  bottom: 50px;
+  right: 20px;
+  z-index: 100; /* Button được ưu tiên hiển thị đè lên các phần khác*/
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+#map {
+  padding: 0.5em;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.social-icon {
+  width: 50px;
+  height: auto;
+}
+
+.copyright {
+  background-color: #4c4c4c;
+  color: white;
+  font-family: 'Helvetica', Times, sans-serif;
+  font-size: 14px;
+  width: 100%;
+  text-align: center;
+}
+p a:hover{
+  color: red;
+  text-decoration: none;
+}

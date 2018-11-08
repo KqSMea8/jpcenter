@@ -1,0 +1,10 @@
+<div class="container editor">
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text article-title" id="inputGroup-sizing-default">Tiêu đề</span>
+    </div>
+    <input type="text" class="form-control" id="article-title">
+  </div>
+  <ckeditor [editor]="Editor" [(ngModel)]="model.editorData" (change)="onChange($event)"></ckeditor>
+  <button type="button" class="btn btn-danger btn-post" (click)="postArticle()">Gửi bài</button>
+</div>

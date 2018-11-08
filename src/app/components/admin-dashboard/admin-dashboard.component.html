@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="row search-bar">
+    <form id="form-search" class="form-inline" method="GET" action="">
+      <div class="col-12 col-md-auto search-item">
+        <label for="search-sort">Mục</label>
+        <select class="form-control dropdown" id="search-content" name="content">
+          <option value="updatetime">Tin tức và sự kiện</option>
+          <option value="updatetime">Dịch vụ & Đối tác</option>
+          <option value="posttime">Giới thiệu</option>
+          <option value="year">Khóa học</option>
+        </select>
+      </div>
+      <div class="col-12 col-md-auto search-item">
+        <label for="search-eptype">Chuyên mục</label>
+        <select class="form-control dropdown" id="search-categories" name="categories">
+          <option value="" selected></option>
+          <option value="">Tư vấn du học và việc làm</option>
+          <option value="single">Xuất khẩu lao động</option>
+          <option value="serial">Dự án</option>
+          <option value="theater">Đối tác</option>
+        </select>
+      </div>
+      <div class="col-12 col-md-auto search-item">
+        <label for="search-language">Trạng thái</label>
+        <select class="form-control dropdown" id="search-status" name="status">
+          <option value="">Chờ duyệt</option>
+          <option value="vietnam">Đã duyệt</option>
+        </select>
+      </div>
+      <div class="col-12 col-md-auto search-item">
+        <label for="search-country">Ngày tạo</label>
+        <input class="form-control" type="date" id="search-created-date">
+      </div>
+      <div class="col-12 col-md-auto search-item">
+        <label for="search-title">Tiêu đề</label>
+        <form>
+          <div class="form-row">
+            <div class="col">
+              <input type="text" class="form-control" id="search-title" placeholder="">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-12 col-md-auto search-item">
+        <label for="btn-search" style="opacity: 0">Tìm kiếm</label>
+        <button type="button" id="btn-search" class="btn btn-search"><span>Tìm kiếm</span></button>
+      </div>
+    </form>
+  </div>
+
+  <table class="table search-result">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">STT</th>
+      <th scope="col">Chuyên mục</th>
+      <th scope="col">Tiêu đề</th>
+      <th scope="col">Nội dung</th>
+      <th scope="col">Trạng thái</th>
+      <th scope="col">Ngày tạo</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col">
+      	<button type="button" class="btn btn-danger search-result" [routerLink]="['/editor']">Viết bài</button>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let content of content; let i = index">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>Tin tức & Sự kiện</td>
+      <td>{{ content.Name }}</td>
+      <td style="max-width: 30em" >{{ content.Content }}</td>
+      <td>{{ content.Status }}</td>
+      <td>{{ content.createdAt }}</td>
+      <td>
+      	<button type="button" class="btn btn-primary search-result" (click)="editArticle(content.Content)" [routerLink]="['/editor']">Sửa</button>
+      </td>
+      <td><button type="button" class="btn btn-danger search-result" id="btn-delete-{{ i + 1 }}" (click)="deleteArticle(content.id, $event)">Xóa</button></td>
+      <td>
+      	<button type="button" class="btn btn-success search-result">Duyệt</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>

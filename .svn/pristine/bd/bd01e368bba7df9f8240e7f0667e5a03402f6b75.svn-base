@@ -1,0 +1,37 @@
+<div id="Carousel" class="carousel slide" data-ride="carousel" data-interval="3000">
+
+    <div class="carousel-inner">
+
+        <div class="carousel-item active">
+            <div class="row">
+                <a href="https://fado.vn/us/amazon-store/?utm_source=google&utm_medium=cpc&utm_campaign=amazon-us&ref_id=googleadword&gclid=EAIaIQobChMIgJmGmuqv3gIVngcqCh3VogBcEAAYASAAEgJ8c_D_BwE"
+                    target="_blank">
+                    <img src="./assets/images/banner1.png" alt="Image" style="max-width:100%;">
+                </a>
+            </div>
+        </div>
+
+        <div class="carousel-item">
+            <div class="row">
+                <a href="https://tiki.vn/chuong-trinh/uu-dai-ve-cgv-cho-khach-hang-tiki?src=topbar" target="_blank">
+                    <img src="./assets/images/banner2.png" alt="Image" style="max-width:100%;">
+                </a>
+            </div>
+        </div>
+
+        <div class="carousel-item">
+            <div class="row">
+                <a href="https://tiki.vn/tikinow?var=new-banner&utm_expid=30064684-35.gvb6EKX1QHextDfLZ6ltoQ.1&src=topbar&utm_referrer=https%3A%2F%2Ftiki.vn%2F%3Futm_source%3Dgoogle%26utm_medium%3Dcpc%26gclid%3DEAIaIQobChMIvLqG-O6v3gIVBXZgCh1g5AWgEAAYASAAEgIvJfD_BwE"
+                    target="_blank">
+                    <img src="./assets/images/banner3.png" alt="Image" style="max-width:100%;">
+                </a>
+            </div>
+        </div>
+        <div class="small">
+            <a href="https://www.gotit.vn/cgv-guideline"
+                    target="_blank">
+                <img src="./assets/images/banner4.png" alt="Image" style="max-width:100%;">
+            </a>
+        </div>
+    </div>
+</div>

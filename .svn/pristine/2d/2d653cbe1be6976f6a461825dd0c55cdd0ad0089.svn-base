@@ -1,0 +1,83 @@
+<div class="container">
+  <h1 id="schedule">
+    <b>Lịch khai giảng</b>
+  </h1>
+  <div class="detail">
+    <table class="table table-hover table-bordered table-striped">
+      <thead>
+        <tr>
+          <th scope="col">TÊN KHÓA HỌC</th>
+          <th scope="col">LỊCH HỌC</th>
+          <th scope="col">THỜI GIAN HỌC</th>
+          <th scope="col">NGÀY KHAI GIẢNG</th>
+          <th scope="col">HỌC PHÍ</th>
+        </tr>
+      </thead>
+      <tr>
+        <td> TIẾNG NHẬT N5.1</td>
+        <td>
+          <h6> Thứ 2, Thứ 4, Thứ 6</h6>
+          <p> 18h30 - 20h30</p>
+          <hr />
+          <h6> Thứ 3, Thứ 5, Thứ 6</h6>
+          <p> 18h30 -20h30 </p>
+        </td>
+        <td> 2 tháng/ khóa</td>
+        <td> 16/10/2018</td>
+        <td>950 000 VNĐ</td>
+      </tr>
+      <tr>
+        <td> TIẾNG NHẬT N5.2</td>
+        <td>
+          <h6> Thứ 2, Thứ 4, Thứ 6</h6>
+          <p> 18h30 - 20h30</p>
+          <hr />
+          <h6> Thứ 3, Thứ 5, Thứ 6</h6>
+          <p> 18h30 -20h30 </p>
+        </td>
+        <td> 2 tháng/ khóa</td>
+        <td> 26/10/2018</td>
+        <td>950 000 VNĐ</td>
+      </tr>
+      <tr>
+        <td> TIẾNG NHẬT N4.1</td>
+        <td>
+          <h6> Thứ 2, Thứ 4, Thứ 6</h6>
+          <p> 18h30 - 20h30</p>
+          <hr />
+          <h6> Thứ 3, Thứ 5, Thứ 6</h6>
+          <p> 18h30 -20h30 </p>
+        </td>
+        <td> 2 tháng/ khóa</td>
+        <td> 16/11/2018</td>
+        <td>1 150 000 VNĐ</td>
+      </tr>
+      <tr>
+        <td> TIẾNG NHẬT N4.2</td>
+        <td>
+          <h6> Thứ 2, Thứ 4, Thứ 6</h6>
+          <p> 18h30 - 20h30</p>
+          <hr />
+          <h6> Thứ 3, Thứ 5, Thứ 6</h6>
+          <p> 18h30 -20h30 </p>
+        </td>
+        <td> 2 tháng/ khóa</td>
+        <td> 26/11/2018</td>
+        <td>1 200 000 VNĐ</td>
+      </tr>
+      <tr>
+        <td> TIẾNG NHẬT N3.1</td>
+        <td>
+          <h6> Thứ 2, Thứ 4, Thứ 6</h6>
+          <p> 18h30 - 20h30</p>
+          <hr />
+          <h6> Thứ 3, Thứ 5, Thứ 6</h6>
+          <p> 18h30 -20h30 </p>
+        </td>
+        <td> 2 tháng/ khóa</td>
+        <td> 16/12/2018</td>
+        <td>1 250 000 VNĐ</td>
+      </tr>
+    </table>
+  </div>
+</div>

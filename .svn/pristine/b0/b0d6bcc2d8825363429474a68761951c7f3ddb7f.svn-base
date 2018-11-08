@@ -1,0 +1,47 @@
+   <div class="events section-padding">
+    <h3 class="text-center section-lg-title">TIN TỨC &amp; SỰ KIỆN</h3>
+    <div class="row">
+      <div class="col-md-4 card-wrap">
+        <a routerLink="/tin-tuc-su-kien/QNU-JAPAN-CENTER-Dang-ky-hoc-vien" class="card">
+          <img class="card-img-top" src="{{img1}}" alt="Card img cap">
+          <div class="card-body">
+            <h5 class="card-title">
+              QNU Japan Center - Đăng ký học viên
+            </h5>
+            <p class="card-text">Trung tâm Ngôn ngữ và Văn hóa Nhật Bản Trường Đại học Quy Nhơn thường xuyên nhận học viên các lớp tiếng Nhật. Hiện nay ...
+              <span class="read-more">Đọc tiếp</span>
+            </p>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrap">
+        <a routerLink="/tin-tuc-su-kien/bup-be-thang-nam-samurai" class="card">
+          <img class="card-img-top" src="{{img2}}" alt="Card img cap">
+          <div class="card-body">
+            <h5 class="card-title">
+              Búp bê tháng Năm Samurai
+            </h5>
+            <p class="card-text">Trung tâm Nhật Bản chân thành cảm ơn FPT Japan đã tặng Búp bê Samurai cùng với những lời chúc tốt đẹp ngày 4/8 vừa qua. Trong tháng 8, thỏa thuận về việc QNU Japan Center là đối tác chiến lược Chương trình 10K BrSE của FPT Software sẽ được ký kết....
+              <span class="read-more">Đọc tiếp</span>
+            </p>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrap">
+        <a routerLink="/tin-tuc-su-kien/ngai-dai-su-nhat-ban-umeda-kunio-du-khai-truong" class="card">
+          <img class="card-img-top" src="{{img3}}" alt="Card img cap">
+          <div class="card-body">
+            <h5 class="card-title">
+              Ngài Đại sứ Nhật Bản Umeda Kunio dự khai trương Trung tâm Ngôn ngữ và Văn hóa Nhật Bản
+            </h5>
+            <p class="card-text">Chiều ngày 27/4/2018, Ngài Umeda Kunio – Đại sứ đặc mệnh toàn quyền Nhật Bản tại Việt Nam...
+              <span class="read-more">Đọc tiếp</span>
+            </p>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="detail text-center">
+      <a class="btn btn-outline" [routerLink]="['/tin-tuc-su-kien']">Xem tất cả</a>
+    </div>
+  </div> 

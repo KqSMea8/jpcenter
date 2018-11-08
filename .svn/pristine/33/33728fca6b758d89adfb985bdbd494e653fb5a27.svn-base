@@ -1,0 +1,13 @@
+a {
+  cursor: pointer;
+}
+
+h4 {
+  margin-left: 14px;
+  font-weight: bold;
+}
+
+.left-menu {
+  border: solid 1px #e5e5e5;
+  margin-bottom: 30em;
+}

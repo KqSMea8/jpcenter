@@ -1,0 +1,13 @@
+.editor {
+	margin: 2em auto;
+}
+
+.btn-post {
+	margin: 2em auto;
+	background-color: rgb(188, 0, 45);
+}
+
+.article-title {
+	background-color: rgb(188, 0, 45);
+	color: white;
+}

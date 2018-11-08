@@ -1,0 +1,70 @@
+<header>
+    <div class="container" id="main-menu">
+      <a [routerLink]="['/trang-chu']"><img class="logo-main" src="./assets/images/QNUNC-logo.svg" width="60px" height="60px" alt="Trung tâm Nhật ngữ Đại học Quy Nhơn"></a>
+      <div class="name-center">
+        <p class="name">
+          <a [routerLink]="['/trang-chu']">QUY NHON UNIVERSITY  </a>
+        </p>
+        <p class="sub-name">
+          <a [routerLink]="['/trang-chu']">JAPAN CENTER</a>
+        </p>
+      </div>
+      <div class="container" style="position: relative;" *ngFor='let info of data'>
+          <div class="main-hotline">
+            <img class="icon-hotline" src="./../assets/images/phonered.png" width="30px" height="30px" alt="">
+            Hotline: <p class="name-hotline">{{ info.Hotline }}</p>
+          </div>
+          <div class="main-email">
+             <img class="icon-email" src="./../assets/images/Red-email-icon.png" width="35px" height="35px" alt="">
+           Email:<p class="name-email"><a href="https://accounts.google.com">{{ info.Mail }}</a></p> 
+          </div>        
+      </div>
+      <div class="logo">
+        <div class="dropdown">
+          <img class="flag dropbtn"  src="./../assets/images/vietnam.png" width="25px" height="25px" alt="logo-language">
+          <div class="dropdown-content" id="menu-language">
+            <a><img src="./../assets/images/vietnam.png" class="language-icon" alt="Tiếng Việt">Tiếng Việt</a>
+            <a><img src="./../assets/images/japan.png" class="language-icon" alt="Tếng Nhật">日本語</a>
+          </div>
+        </div>
+        <div class="dropdown">          
+            <a href="#loginModal" role="button"data-toggle="modal">
+              <img id="logo-lgogin" class="flag dropbtn" src="./../assets/images/login.png" width="20px" height="20px">
+            </a>                  
+        </div>
+        <div id="menu-logout" class="dropdown" alt="logo-login">
+            <h6 id ="login"></h6>
+            <div class="dropdown-content" id="menu-language">
+              <app-logout></app-logout>
+            </div>
+        </div>
+        <div id="loginModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+          <app-login></app-login>
+        </div>
+      </div>
+      <app-banner></app-banner>
+    </div>
+  <nav class="navbar  navbar-expand-lg navbar-light top-navbar" id="nav" data-toggle="sticky-onscroll">
+    <div class="container">
+      <a [routerLink]="['/trang-chu']"> <img  id="logo-hide" src="./assets/images/QNUNC-logo.svg" width="60px" height="60px" alt="logo"></a>
+      <div></div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav" *ngFor="let item of data; let i = index">
+          <li class="nav-item dropdown">
+            <a class="nav-link" [routerLink]="[item.Slug]">
+            {{ item.Name }} 
+            <span class="caret"></span>
+            </a>
+            <div class="dropdown-content" *ngIf="data[i].categories.length > 0">
+              <a class="dropdown-item" [routerLink]="[subItem.slug]" *ngFor="let subItem of data[i].categories">{{ subItem.name }}</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

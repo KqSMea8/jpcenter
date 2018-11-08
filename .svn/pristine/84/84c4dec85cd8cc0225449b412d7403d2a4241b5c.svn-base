@@ -1,0 +1,53 @@
+<div class="container">
+    <h3 title="Liên kết - sự kiện">LIÊN KẾT - SỰ KIỆN</h3>
+    <ngb-carousel id="slider-link" data-interval="3000">
+        <ng-template ngbSlide class="carousel-item">
+            <div class="row">
+                <div class="col-md-3">
+                    <a href="/trang-chu">
+                        <img src="./assets/images/JC-logo.png" alt="Image" style="max-width:100%;">
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="http://qnu.edu.vn/" target="_blank">
+                        <img src="./assets/images/logo-qnu.png" alt="Image" style="max-width:100%;">
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="https://www.tma.vn/" target="_blank">
+                        <img src="./assets/images/TMA.png" alt="Image" style="max-width:100%;">
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="http://ftt.edu.vn/" target="_blank">
+                        <img src="./assets/images/kt-cn.png" alt="Image" style="max-width:100%;">
+                    </a>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template ngbSlide class="carousel-item">
+            <div class="row">
+                <div class="col-md-3">
+                    <a href="http://qnu.edu.vn/" target="_blank">
+                        <img src="./assets/images/logo-qnu.png" alt="Image" style="max-width:100%;">
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="https://www.tma.vn/" target="_blank">
+                        <img src="./assets/images/TMA.png" alt="Image" style="max-width:100%;">
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="http://ftt.edu.vn/" target="_blank">
+                        <img src="./assets/images/kt-cn.png" alt="Image" style="max-width:100%;">
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="/trang-chu">
+                        <img src="./assets/images/JC-logo.png" alt="Image" style="max-width:100%;">
+                    </a>
+                </div>
+            </div>
+        </ng-template>
+    </ngb-carousel>
+</div>
